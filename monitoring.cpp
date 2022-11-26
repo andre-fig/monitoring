@@ -84,7 +84,6 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
 {
     String msg;
   
-    /* obtem a string do payload recebido */
     for(int i = 0; i < length; i++) 
     {
        char c = (char)payload[i];
@@ -94,7 +93,6 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
     Serial.print("Chegou a seguinte string via MQTT: ");
     Serial.println(msg);
     
-    /* toma ação dependendo da string recebida */
     if (msg.equals("1"))
     {
         digitalWrite(PIN_LED, HIGH);
@@ -135,11 +133,7 @@ void VerificaConexoesWiFIEMQTT(void)
       
      reconnectWiFi(); 
 }
- 
-/* Função: reconecta-se ao WiFi
- * Parâmetros: nenhum
- * Retorno: nenhum
- */
+
 void reconnectWiFi(void) 
 {
 
@@ -164,19 +158,14 @@ void reconnectWiFi(void)
 void setup() 
 {
     Serial.begin(115200);  
- 
-    /* Configuração do pino ligado ao LED como output 
-       e inicialização do mesmo em LOW */
+
     pinMode(PIN_LED, OUTPUT);
     digitalWrite(PIN_LED,LOW);
  
-    /* Inicializacao do sensor de temperatura */
     dht.begin();  
- 
-    /* Inicializa a conexao wi-fi */
+
     initWiFi();
- 
-    /* Inicializa a conexao ao broker MQTT */
+
     initMQTT();
 }
  
